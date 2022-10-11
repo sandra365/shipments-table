@@ -1,4 +1,4 @@
-export const data = [{
+export const hardcodedData = [{
 	"orderNo": "zz-450581-11385595-4210084",
 	"date": "10/16/2019",
 	"customer": "NXP Semiconductors N.V.",
