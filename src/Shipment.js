@@ -1,3 +1,4 @@
+import ShipmentDetails from './ShipmentDetails';
 // function ShipmentDetail(props) {
 //    return <td className=''>{props.shipmentDetail}</td>;
 // }
@@ -6,11 +7,25 @@ function Button(props) {
   return <button className='' onClick={props.eventHandler}>{props.buttonText}</button>;
 }
 
-function Shipment({ orderNo, date, customer, trackingNo, status, consignee, allShipments, deleteShipment }) {
+function Shipment({ orderNo, date, customer, trackingNo, status, consignee, allShipments, setShipmentsList }) {
+  const handleUpdate = () => {
+    return(
+      <ShipmentDetails
+        orderNo={orderNo}
+        date={date}
+        customer={customer}
+        trackingNo={trackingNo}
+        status={status}
+        consignee={consignee}
+        allShipments={allShipments}
+        updateShipment={setShipmentsList}
+    />
+    );
+  };
+
   const handleDelete = () => {
-    //grab current component and delete in from all components array, then update state
     const filteredShipments = allShipments.filter(shipment => shipment.orderNo !== orderNo);
-    deleteShipment(filteredShipments);
+    setShipmentsList(filteredShipments);
     console.log('All shipments', allShipments.length)
     console.log('Shipment after filtering', filteredShipments.length);
     console.log(filteredShipments);
@@ -25,14 +40,11 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, allS
       <td>{status}</td>
       <td>{consignee}</td>
       <td>
-        { <Button buttonText={'Update'} /> }
+        { <Button buttonText={'Update'} eventHandler={handleUpdate} /> }
         { <Button buttonText={'Delete'}  eventHandler={handleDelete} /> }
       </td>
     </tr>
   );
-
-  
-
 
   return (
     shipmentDetailsRow 
@@ -43,43 +55,9 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, allS
 export default Shipment;
 
 
-//decide on object destructuring usage
-//add delete function
-//rewrite button rendering
 
-// onClick={handleDelete}
-// const handleDelete = () => {
-//   const filteredShipments = props.allShipments.filter(shipment => {
-//     shipment.orderNo !== props.shipmentDetails.orderNo;
-//   });
-//   props.deleteShipment(filteredShipments);
-// };
-
-
-// function Shipment(props)) {
-//   const shipmentDetailsArr = Object.values(props.shipmentDetails);
-//   const shipmentDetailsCells = (
-//     shipmentDetailsArr.map((shipmentDetail, index) => {
-//       return <ShipmentDetail key={index} shipmentDetail={shipmentDetail} />; //fing better option for key
-//     })
-//   );//?? naming here
-//   const buttonsCell = (
-//     <td>
-//       { <Button buttonText={'Update'} /> }
-//       { <Button buttonText={'Delete'}  /> }
-//     </td>
-//   );//?? naming here
 
   
 
-//   return (
-//     <tr>
-//       {shipmentDetailsCells}
-//       {buttonsCell}
-//     </tr>
-//   );
-// }
 
-
-// { <Button buttonText={'Delete'}  onClick={handleDelete} /> }
 
