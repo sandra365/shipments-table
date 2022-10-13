@@ -8,6 +8,7 @@ import ShipmentDetails from './ShipmentDetails';
 
 const App = () => {
     const [shipmentsList, setShipmentsList] = useState(hardcodedData);
+    const [isFormVisible, setIsFormVisible] = useState(false);
     console.log('Shipments from ShipmentsTable', shipmentsList);
   //const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
 
