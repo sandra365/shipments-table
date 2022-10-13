@@ -5,22 +5,23 @@ import axios from 'axios';
 import {hardcodedData} from './data.js';
 
 function ShipmentsTable() {
-  const [fetchedData, setFetchedData] = useState([]);
-  const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
+  const [shipmentsList, setShipmentsList] = useState(hardcodedData);
+  console.log('Shipments from ShipmentsTable', shipmentsList);
+  //const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await axios.get(apiURL);
-      setFetchedData(data);
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await axios.get(apiURL);
+  //     setShipmentsList(data);
+  //   };
+  //   getData();
+  // }, []);
 
-  const data = fetchedData.data ? fetchedData.data : hardcodedData;
+  //const shipments = shipmentsList.data ? shipmentsList.data : hardcodedData;//is it necessary/how to rewrite
 
   const shipmentsTableHeader = (
-    <thead className=''>
-      <tr className=''>
+    <thead>
+      <tr>
         <td>ORDERNO</td>
         <td>DELIVERYDATE</td>
         <td>CUSTOMER</td>
@@ -32,16 +33,30 @@ function ShipmentsTable() {
     </thead>
   );
 
+  const shipmentComponentsList = (
+    shipmentsList.map(({ orderNo, date, customer, trackingNo, status, consignee }) => {
+      return (
+        <Shipment 
+          key={orderNo} //is it necessary here and where to use keys at all?
+          orderNo={orderNo}
+          date={date}
+          customer={customer}
+          trackingNo={trackingNo}
+          status={status}
+          consignee={consignee}
+          allShipments={shipmentsList}
+          deleteShipment={setShipmentsList}
+        />
+      );
+    })
+  );
+    
   return (
-    <div className="ShipmentsTableContainer">
-      <table className="ShpimentsTable">
+    <div className="shipments-table-container">
+      <table className="shipments-table">
         {shipmentsTableHeader}
-        <tbody className=''>
-          {
-            data.map(shipmentInfo => {
-              return <Shipment key={shipmentInfo.orderNo} shipmentInfo={shipmentInfo} />
-            })
-          }
+        <tbody>
+          {shipmentComponentsList}
         </tbody>
       </table>
     </div>
@@ -51,12 +66,12 @@ function ShipmentsTable() {
 export default ShipmentsTable;
 
 
-// props.data.forEach(shipmentInfo => {
+// shipments.map(shipmentDetails => {
 //   return (
-//     <tr>
-//       <td>
-//         <Shipment shipmentInfo={shipmentInfo} />
-//       </td>
-//     </tr>
-//   )
+//   <Shipment 
+//     key={shipmentDetails.orderNo} //is it necessary here and where to use keys at all?
+//     allShipments={shipments}
+//     shipmentDetails={shipmentDetails} //plus another prop for manipulating state
+//     deleteShipment={setShipmentsList}
+//   />)
 // })
