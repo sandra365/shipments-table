@@ -1,24 +1,8 @@
 import './App.css';
+import './index.css';
 import Shipment from './Shipment';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import {hardcodedData} from './data.js';
 
-function ShipmentsTable() {
-  const [shipmentsList, setShipmentsList] = useState(hardcodedData);
-  console.log('Shipments from ShipmentsTable', shipmentsList);
-  //const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await axios.get(apiURL);
-  //     setShipmentsList(data);
-  //   };
-  //   getData();
-  // }, []);
-
-  //const shipments = shipmentsList.data ? shipmentsList.data : hardcodedData;//is it necessary/how to rewrite
-
+function ShipmentsTable({ shipmentsList, setShipmentsList }) {
   const shipmentsTableHeader = (
     <thead>
       <tr>
@@ -45,21 +29,19 @@ function ShipmentsTable() {
           status={status}
           consignee={consignee}
           allShipments={shipmentsList}
-          deleteShipment={setShipmentsList}
+          setShipmentsList={setShipmentsList}
         />
       );
     })
   );
     
   return (
-    <div className="shipments-table-container">
-      <table className="shipments-table">
-        {shipmentsTableHeader}
-        <tbody>
-          {shipmentComponentsList}
-        </tbody>
-      </table>
-    </div>
+    <table className='shipments-table'>
+      {shipmentsTableHeader}
+      <tbody>
+        {shipmentComponentsList}
+      </tbody>
+    </table>
   );
 }
 
