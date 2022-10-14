@@ -2,7 +2,7 @@ import './App.css';
 import './index.css';
 import Shipment from './Shipment';
 
-function ShipmentsTable({ shipmentsList, setShipmentsList }) {
+function ShipmentsTable({ shipmentsList, setShipmentsList, setIsFormVisible, handleDelete, handleFormUpdate }) {
   const shipmentsTableHeader = (
     <thead>
       <tr>
@@ -21,15 +21,17 @@ function ShipmentsTable({ shipmentsList, setShipmentsList }) {
     shipmentsList.map(({ orderNo, date, customer, trackingNo, status, consignee }) => {
       return (
         <Shipment 
-          key={orderNo} //is it necessary here and where to use keys at all?
+          key={orderNo}
           orderNo={orderNo}
           date={date}
           customer={customer}
           trackingNo={trackingNo}
           status={status}
           consignee={consignee}
-          allShipments={shipmentsList}
           setShipmentsList={setShipmentsList}
+          handleFormUpdate={handleFormUpdate}
+          handleDelete={handleDelete}
+          setIsFormVisible={setIsFormVisible}
         />
       );
     })
@@ -46,14 +48,3 @@ function ShipmentsTable({ shipmentsList, setShipmentsList }) {
 }
 
 export default ShipmentsTable;
-
-
-// shipments.map(shipmentDetails => {
-//   return (
-//   <Shipment 
-//     key={shipmentDetails.orderNo} //is it necessary here and where to use keys at all?
-//     allShipments={shipments}
-//     shipmentDetails={shipmentDetails} //plus another prop for manipulating state
-//     deleteShipment={setShipmentsList}
-//   />)
-// })

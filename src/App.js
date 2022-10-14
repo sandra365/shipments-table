@@ -7,30 +7,53 @@ import ShipmentsTable from './ShipmentsTable';
 import ShipmentDetails from './ShipmentDetails';
 
 const App = () => {
-    const [shipmentsList, setShipmentsList] = useState(hardcodedData);
+    const [shipmentsList, setShipmentsList] = useState(null);
     const [isFormVisible, setIsFormVisible] = useState(false);
-    console.log('Shipments from ShipmentsTable', shipmentsList);
-  //const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
+    const [formData, setFormData] = useState({});
+    const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await axios.get(apiURL);
-  //     setShipmentsList(data);
-  //   };
-  //   getData();
-  // }, []);
+    useEffect(() => {
+        const getData = async () => {
+            const response = await axios.get(apiURL);
+            setShipmentsList(response.data);
+        };
+        getData();
+    }, []);
 
-  //const shipments = shipmentsList.data ? shipmentsList.data : hardcodedData;//is it necessary/how to rewrite/put it outside so it won't load every time component being redrawn
+    const handleFormUpdate = (orderNo) => {
+        const formData = shipmentsList.find(shipment => shipment.orderNo === orderNo);
+        setFormData(formData);
+        setIsFormVisible(true);
+    };
+
+    const handleDelete = (orderNo) => {
+        const updatedShipmentsList = shipmentsList.filter(shipment => shipment.orderNo !== orderNo);
+        setShipmentsList(updatedShipmentsList);
+      };
 
     return(
-        <div id='shipments-table-container' className='shipments-table-container'>
-            <ShipmentDetails />
-            <ShipmentsTable 
-                shipmentsList={shipmentsList}
-                setShipmentsList={setShipmentsList}
-            />
-        </div>
+        shipmentsList ? (
+            <div id='shipments-table-container' className='shipments-table-container'>
+                <div className='input-form' style={
+                    {display: isFormVisible ? 'block' : 'none' }}>
+                    <ShipmentDetails 
+                        formData={formData}
+                        setIsFormVisible={setIsFormVisible}
+                    />
+                </div>
+                <ShipmentsTable 
+                    shipmentsList={shipmentsList}
+                    setShipmentsList={setShipmentsList}
+                    setIsFormVisible={setIsFormVisible}
+                    handleFormUpdate={handleFormUpdate}
+                    handleDelete={handleDelete}
+                />
+            </div>
+        ) : null
     );
 }
 
 export default App;
+
+
+//document.getElementById('order-no-input').focus();
