@@ -33,7 +33,7 @@ const App = () => {
 
     return(
         shipmentsList ? (
-            <div id='shipments-table-container' className='shipments-table-container'>
+            <div id='shipments-table-container' className='shipments-table-container table-responsive'>
                 <div className='input-form' style={
                     {display: isFormVisible ? 'block' : 'none' }}>
                     <ShipmentDetails 

@@ -6,13 +6,13 @@ function ShipmentsTable({ shipmentsList, setShipmentsList, setIsFormVisible, han
   const shipmentsTableHeader = (
     <thead>
       <tr>
-        <td>ORDERNO</td>
-        <td>DELIVERYDATE</td>
-        <td>CUSTOMER</td>
-        <td>TRACKINGINFO</td>
-        <td>STATUS</td>
-        <td>CONSIGNEE</td>
-        <td></td>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder'>order</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder'>deliverytime</th>
+        <th>customer</th>
+        <th>tracking</th>
+        <th>status</th>
+        <th>consignee</th>
+        <th></th>
       </tr>
     </thead>
   );
@@ -38,7 +38,7 @@ function ShipmentsTable({ shipmentsList, setShipmentsList, setIsFormVisible, han
   );
     
   return (
-    <table className='shipments-table'>
+    <table className='shipments-table table align-items-center mb-0'>
       {shipmentsTableHeader}
       <tbody>
         {shipmentComponentsList}

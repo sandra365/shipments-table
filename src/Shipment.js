@@ -1,5 +1,5 @@
 function Button(props) {
-  return <button className='' onClick={props.eventHandler}>{props.buttonText}</button>;
+  return <button className={props.buttonClassNames} onClick={props.eventHandler}>{props.buttonText}</button>;
 }
 
 function Shipment({ orderNo, date, customer, trackingNo, status, consignee, setShipmentsList, handleFormUpdate, handleDelete, setIsFormVisible }) {
@@ -13,8 +13,8 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, setS
       <td>{status}</td>
       <td>{consignee}</td>
       <td>
-        { <Button buttonText={'Update'} eventHandler={ () => {handleFormUpdate(orderNo)}} /> }
-        { <Button buttonText={'Delete'} eventHandler={ () => {handleDelete(orderNo)} } /> }
+        { <Button buttonClassNames={'ni ni-badge'} eventHandler={ () => {handleFormUpdate(orderNo)}} /> }
+        { <Button buttonClassNames={'ni ni-fat-remove'} eventHandler={ () => {handleDelete(orderNo)} } /> }
       </td>
     </tr>
   );
