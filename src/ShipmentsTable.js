@@ -1,18 +1,17 @@
 import './App.css';
-import './index.css';
 import Shipment from './Shipment';
 
-function ShipmentsTable({ shipmentsList, setShipmentsList, setIsFormVisible, handleDelete, handleFormUpdate }) {
+function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
   const shipmentsTableHeader = (
     <thead>
       <tr>
-        <th className='text-uppercase text-secondary text-xs font-weight-bolder'>order</th>
-        <th className='text-uppercase text-secondary text-xs font-weight-bolder'>deliverytime</th>
-        <th>customer</th>
-        <th>tracking</th>
-        <th>status</th>
-        <th>consignee</th>
-        <th></th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>order</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>deliverytime</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>customer</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>tracking</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>status</th>
+        <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>consignee</th>
+        <th className='text-xs'></th>
       </tr>
     </thead>
   );
@@ -28,19 +27,17 @@ function ShipmentsTable({ shipmentsList, setShipmentsList, setIsFormVisible, han
           trackingNo={trackingNo}
           status={status}
           consignee={consignee}
-          setShipmentsList={setShipmentsList}
           handleFormUpdate={handleFormUpdate}
           handleDelete={handleDelete}
-          setIsFormVisible={setIsFormVisible}
         />
       );
     })
   );
     
   return (
-    <table className='shipments-table table align-items-center mb-0'>
+    <table className='shipments-table table align-items-center'>
       {shipmentsTableHeader}
-      <tbody>
+      <tbody className='text-xs'>
         {shipmentComponentsList}
       </tbody>
     </table>

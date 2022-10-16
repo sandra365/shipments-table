@@ -1,5 +1,4 @@
 import './App.css';
-import './index.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {hardcodedData} from './data.js';
@@ -8,7 +7,6 @@ import ShipmentDetails from './ShipmentDetails';
 
 const App = () => {
     const [shipmentsList, setShipmentsList] = useState(null);
-    const [isFormVisible, setIsFormVisible] = useState(false);
     const [formData, setFormData] = useState({});
     const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
 
@@ -23,7 +21,6 @@ const App = () => {
     const handleFormUpdate = (orderNo) => {
         const formData = shipmentsList.find(shipment => shipment.orderNo === orderNo);
         setFormData(formData);
-        setIsFormVisible(true);
     };
 
     const handleDelete = (orderNo) => {
@@ -31,29 +28,51 @@ const App = () => {
         setShipmentsList(updatedShipmentsList);
       };
 
+    const formModal = (
+        <div className='modal fade' id='formUpdateModal' tabIndex='-1' role='dialog' aria-labelledby='formUpdateModal' aria-hidden='true'>
+            <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-body p-0'>
+                        <div className='card card-plain'>
+                            <div className='card-header pb-0 text-left'>
+                                <h5 className='font-weight-bolder text-muted'>Shipment Details</h5>
+                            </div>
+                            <div className='card-body'>
+                                <ShipmentDetails 
+                                    formData={formData}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     return(
         shipmentsList ? (
-            <div id='shipments-table-container' className='shipments-table-container table-responsive'>
-                <div className='input-form' style={
-                    {display: isFormVisible ? 'block' : 'none' }}>
-                    <ShipmentDetails 
-                        formData={formData}
-                        setIsFormVisible={setIsFormVisible}
-                    />
-                </div>
-                <ShipmentsTable 
-                    shipmentsList={shipmentsList}
-                    setShipmentsList={setShipmentsList}
-                    setIsFormVisible={setIsFormVisible}
-                    handleFormUpdate={handleFormUpdate}
-                    handleDelete={handleDelete}
-                />
+            <div>
+                <div className='min-height-300 bg-primary position-absolute w-100'></div>
+                <main className='position-relative ps py-6'>
+                    <div className='container-fluid'>
+                        <div className='card'>
+                            <div className='card-header p-0 pt-5'></div>
+                            <div id='shipments-table-container' className='shipments-table-container table-responsive'>
+                                {formModal}
+                                <div className='card-body py-0'>
+                                    <ShipmentsTable 
+                                        shipmentsList={shipmentsList}
+                                        handleFormUpdate={handleFormUpdate}
+                                        handleDelete={handleDelete}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
         ) : null
     );
 }
 
 export default App;
-
-
-//document.getElementById('order-no-input').focus();
