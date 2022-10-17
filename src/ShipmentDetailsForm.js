@@ -1,5 +1,5 @@
-//rename ShipmentDetails to UpdateForm or smthng else
-const ShipmentDetails = ({formData}) => {
+const ShipmentDetailsForm = ({formData}) => {
+
     const {orderNo, date, customer, trackingNo, status, consignee} = formData;
     
     const form = (
@@ -47,13 +47,14 @@ const ShipmentDetails = ({formData}) => {
                     </div>
                 </div>
             </div>
+            
         </form>
     );
 
     return(form);
 };
 
-export default ShipmentDetails;
+export default ShipmentDetailsForm;
 
 //<form onSubmit={handleSubmit}>
 

@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {hardcodedData} from './data.js';
 import ShipmentsTable from './ShipmentsTable';
-import ShipmentDetails from './ShipmentDetails';
+import ShipmentDetailsForm from './ShipmentDetailsForm';
 
 const App = () => {
+
     const [shipmentsList, setShipmentsList] = useState(null);
     const [formData, setFormData] = useState({});
     const apiURL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
@@ -22,10 +23,9 @@ const App = () => {
         const formData = shipmentsList.find(shipment => shipment.orderNo === orderNo);
         setFormData(formData);
     };
-
     const handleDelete = (orderNo) => {
-        const updatedShipmentsList = shipmentsList.filter(shipment => shipment.orderNo !== orderNo);
-        setShipmentsList(updatedShipmentsList);
+        const reducedShipmentList = shipmentsList.filter(shipment => shipment.orderNo !== orderNo);
+        setShipmentsList(reducedShipmentList);
       };
 
     const formModal = (
@@ -38,7 +38,7 @@ const App = () => {
                                 <h5 className='font-weight-bolder text-muted'>Shipment Details</h5>
                             </div>
                             <div className='card-body'>
-                                <ShipmentDetails 
+                                <ShipmentDetailsForm 
                                     formData={formData}
                                 />
                             </div>

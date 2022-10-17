@@ -2,7 +2,8 @@ import './App.css';
 import Shipment from './Shipment';
 
 function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
-  const shipmentsTableHeader = (
+  
+  const tableHead = (
     <thead>
       <tr>
         <th className='text-uppercase text-secondary text-xs font-weight-bolder px-1'>order</th>
@@ -15,7 +16,6 @@ function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
       </tr>
     </thead>
   );
-
   const shipmentComponentsList = (
     shipmentsList.map(({ orderNo, date, customer, trackingNo, status, consignee }) => {
       return (
@@ -36,7 +36,7 @@ function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
     
   return (
     <table className='shipments-table table align-items-center'>
-      {shipmentsTableHeader}
+      {tableHead}
       <tbody className='text-xs'>
         {shipmentComponentsList}
       </tbody>

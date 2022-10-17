@@ -1,9 +1,10 @@
 function Shipment({ orderNo, date, customer, trackingNo, status, consignee, handleFormUpdate, handleDelete}) {
+
   const updateButton = (
     <button type='button' className='btn btn-icon btn-primary mb-0 mx-1' data-bs-toggle='modal' 
       data-bs-target='#formUpdateModal' onClick={() => {handleFormUpdate(orderNo)}}>
       <span className='btn-inner--icon' role='img' aria-label='update button'>
-        <i class='ni ni-badge'></i>
+        <i className='ni ni-badge'></i>
       </span>
     </button>
   );
@@ -15,8 +16,7 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, hand
     </button>
   );
 
-
-  const shipmentDetailsRow = (
+  const shipmentRow = (
     <tr className='py-5'>
       <td>
         <div className='d-flex flex-row align-items-center px-1'>
@@ -58,7 +58,7 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, hand
   );
 
   return (
-    shipmentDetailsRow 
+    shipmentRow 
   );
 }
 
