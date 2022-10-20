@@ -26,8 +26,24 @@ const App = () => {
     const handleDelete = (orderNo) => {
         const reducedShipmentList = shipmentsList.filter(shipment => shipment.orderNo !== orderNo);
         setShipmentsList(reducedShipmentList);
-      };
+    };
+    const handleInputChange = (event, orderNo, objKey) => {
 
+        const modifiedShipmentList = shipmentsList.map(shipment => {
+
+            if(shipment.orderNo === orderNo) {
+
+                const updatedShipment = {...shipment, [objKey]: event.target.value};
+                setFormData(updatedShipment);
+                return updatedShipment;
+            }
+            return shipment;
+            });
+        
+        setShipmentsList(modifiedShipmentList);
+        console.log(orderNo, event, modifiedShipmentList);
+    };
+    
     const formModal = (
         <div className='modal fade' id='formUpdateModal' tabIndex='-1' role='dialog' aria-labelledby='formUpdateModal' aria-hidden='true'>
             <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
@@ -40,6 +56,7 @@ const App = () => {
                             <div className='card-body'>
                                 <ShipmentDetailsForm 
                                     formData={formData}
+                                    handleInputChange={handleInputChange}
                                 />
                             </div>
                         </div>
