@@ -1,7 +1,7 @@
 import './App.css';
 import Shipment from './Shipment';
 
-function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
+const ShipmentsTable = ({ shipmentsList, handleDelete, handleFormUpdate }) => {
   
   const tableHead = (
     <thead>
@@ -16,6 +16,7 @@ function ShipmentsTable({ shipmentsList, handleDelete, handleFormUpdate }) {
       </tr>
     </thead>
   );
+
   const shipmentComponentsList = (
     shipmentsList.map(({ orderNo, date, customer, trackingNo, status, consignee }) => {
       return (

@@ -1,4 +1,4 @@
-function Shipment({ orderNo, date, customer, trackingNo, status, consignee, handleFormUpdate, handleDelete}) {
+const Shipment = ({ orderNo, date, customer, trackingNo, status, consignee, handleFormUpdate, handleDelete}) => {
 
   const updateButton = (
     <button type='button' className='btn btn-icon btn-primary mb-0 mx-1' data-bs-toggle='modal' 
@@ -57,9 +57,7 @@ function Shipment({ orderNo, date, customer, trackingNo, status, consignee, hand
     </tr>
   );
 
-  return (
-    shipmentRow 
-  );
+  return shipmentRow;
 }
 
 export default Shipment;
